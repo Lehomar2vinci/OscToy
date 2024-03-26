@@ -1,7 +1,7 @@
 OscToy User Guide
 ========================
 
-English
+🇬🇧 English
 -------
 
 ### Features
@@ -22,7 +22,7 @@ English
 4.  **Switch Modes**: Press 'M' to switch between visual and instrument modes.
 5.  **Explore Visuals**: Enjoy the interactive visuals that change with the sound and mouse movement.
 
-Français
+🇫🇷 Français
 --------
 
 ### Fonctionnalités
