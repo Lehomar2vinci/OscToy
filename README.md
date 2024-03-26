@@ -1,5 +1,5 @@
 OscToy User Guide
-
+========================
 
 English
 -------
