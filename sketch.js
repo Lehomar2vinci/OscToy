@@ -161,16 +161,27 @@ function keyPressed() {
             case "A":
             osc.setType("sine");
             break;
+            case "a":
+            osc.setType("sine");
+            break
             case "S":
+            osc.setType("triangle");
+            break;
+            case "s":
             osc.setType("triangle");
             break;
             case "D":
             osc.setType("sawtooth");
             break;
+            case "d":
+            osc.setType("sawtooth");
+            break;
             case "F":
+            osc.setType("square");
+            break;
+            case "f":
             osc.setType("square");
             break;
         }
     }
 }
-
