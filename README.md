@@ -1,4 +1,4 @@
-OscToy User Guide
+PestOSC User Guide
 ========================
 
 🇬🇧 English
@@ -6,7 +6,7 @@ OscToy User Guide
 
 ### Features
 
-**OscToy** is an experimental music instrument built with p5.js, offering an interactive audio-visual experience. Here are its key features:
+**PestOSC** is an experimental music instrument built with p5.js, offering an interactive audio-visual experience. Here are its key features:
 
 *   **Frequency and Amplitude Control**: Move your mouse across the canvas to control the frequency (X-axis) and amplitude (Y-axis) of the sound.
 *   **Visual Effects**: Experience visual feedback in real-time based on the sound's frequency and amplitude, including a unique glitch effect when the amplitude is high.
@@ -31,7 +31,7 @@ OscToy User Guide
 
 ### Fonctionnalités
 
-**OscToy** est un instrument de musique expérimental construit avec p5.js, offrant une expérience audio-visuelle interactive. Voici ses principales fonctionnalités :
+**PestOSC** est un instrument de musique expérimental construit avec p5.js, offrant une expérience audio-visuelle interactive. Voici ses principales fonctionnalités :
 
 *   **Contrôle de Fréquence et d'Amplitude** : Déplacez votre souris sur le canvas pour contrôler la fréquence (axe X) et l'amplitude (axe Y) du son.
 *   **Effets Visuels** : Expérimentez un retour visuel en temps réel basé sur la fréquence et l'amplitude du son, incluant un effet de glitch unique lorsque l'amplitude est élevée.
