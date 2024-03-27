@@ -22,6 +22,10 @@ OscToy User Guide
 4.  **Switch Modes**: Press 'M' to switch between visual and instrument modes.
 5.  **Explore Visuals**: Enjoy the interactive visuals that change with the sound and mouse movement.
 
+### Known issues
+
+*   **This may not work on all browsers (works on Firefox)
+
 🇫🇷 Français
 --------
 
@@ -42,3 +46,7 @@ OscToy User Guide
 3.  **Changer le Type d'Oscillateur** : Appuyez sur 'A' pour l'onde sinusoïdale, 'S' pour l'onde triangulaire, 'D' pour l'onde en dents de scie, et 'F' pour l'onde carrée.
 4.  **Changer de Modes** : Appuyez sur 'M' pour basculer entre les modes visuel et instrument.
 5.  **Explorer les Visuels** : Profitez des visuels interactifs qui changent avec le son et le mouvement de la souris.
+
+### Problèmes connus
+
+*  **Ce projet ne semble pas convenir à tous les navigateurs (fonctionne sous Firefox)
