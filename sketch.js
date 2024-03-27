@@ -79,7 +79,7 @@ function setup() {
     cnv.parent("canvasContainer");
     osc = new p5.Oscillator("sine");
     fft = new p5.FFT();
-    osc.start();
+    // osc.start();
     osc.amp(0); // Commence avec l'amplitude à 0 pour éviter le son au chargement
 }
 
