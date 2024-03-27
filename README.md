@@ -24,7 +24,7 @@ OscToy User Guide
 
 ### Known issues
 
-*   **This may not work on all browsers (works on Firefox)
+*   This may not work on all browsers (works on Firefox). You can try it on [p5.js editor here too.](https://editor.p5js.org/Lehomar2vinci/full/xcNTPdnW5)
 
 🇫🇷 Français
 --------
@@ -49,4 +49,4 @@ OscToy User Guide
 
 ### Problèmes connus
 
-*  **Ce projet ne semble pas convenir à tous les navigateurs (fonctionne sous Firefox)
+*  Ce projet ne semble pas convenir à tous les navigateurs (fonctionne sous Firefox). Vous pouvez essayer OscToy dans [l'éditeur de p5.js ici.](https://editor.p5js.org/Lehomar2vinci/full/xcNTPdnW5)
