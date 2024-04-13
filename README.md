@@ -49,4 +49,4 @@ PestOSC User Guide
 
 ### Problèmes connus
 
-*  Ce projet ne semble pas convenir à tous les navigateurs (fonctionne sous Firefox). Vous pouvez essayer OscToy dans [l'éditeur de p5.js ici.](https://editor.p5js.org/Lehomar2vinci/full/xcNTPdnW5)
+*  Ce projet ne semble pas convenir à tous les navigateurs (fonctionne sous Firefox). Vous pouvez essayer PestOSC dans [l'éditeur de p5.js ici.](https://editor.p5js.org/Lehomar2vinci/full/xcNTPdnW5)
