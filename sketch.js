@@ -1,53 +1,143 @@
+// // FIRST VERSION
+
+// let osc, fft;
+
+// function setup() {
+//     let cnv = createCanvas(800, 600);
+//     cnv.parent("canvasContainer");
+//     osc = new p5.Oscillator("sine");
+//     fft = new p5.FFT();
+//     osc.start();
+//     osc.amp(0.5, 1); // Amp à 0.5, sur 1 seconde
+// }
+
+// function draw() {
+//     let freq = map(mouseX, 0, width, 100, 500);
+//     osc.freq(freq);
+
+//     let amp = map(mouseY, 0, height, 1, 0);
+//     osc.amp(amp);
+
+//     let degradation = map(mouseX + mouseY, 0, width + height, 0, 255);
+//     background(degradation, 100, 255 - degradation, 25);
+
+//     let waveform = fft.waveform();
+//     noFill();
+//     stroke(255 - degradation, degradation, 100);
+//     strokeWeight(2);
+//     beginShape();
+//     for (let i = 0; i < waveform.length; i++) {
+//         let x = map(i, 0, waveform.length, 0, width);
+//         let y = map(waveform[i], -1, 1, 0, height);
+//         vertex(x, y);
+//     }
+//     endShape();
+
+//   // Mise à jour du texte d'information
+//     document.getElementById("infoText").textContent = `Fréquence: ${freq.toFixed(
+//     2)} Hz | Amplitude: ${amp.toFixed(2)}`;
+
+//   // Appliquer l'effet de glitch si l'amplitude est élevée
+//     if (amp > 0.8) {
+//     applyGlitchEffect();
+//     }
+// }
+
+// function applyGlitchEffect() {
+//     loadPixels();
+//     for (let y = 0; y < height; y++) {
+//         for (let x = 0; x < width; x++) {
+//             if (random() < 0.1) {
+//         // Probabilité de glitch sur chaque pixel
+//                 let index = (x + y * width) * 4;
+//                 let offset = int(random(-10, 10)) * 4;
+//                 pixels[index] = pixels[index + offset];
+//                 pixels[index + 1] = pixels[index + 1 + offset];
+//                 pixels[index + 2] = pixels[index + 2 + offset];
+//                 }
+//             }
+//         }
+//     updatePixels();
+// }
+
+// function mousePressed() {
+//     if (osc.started) {
+//         osc.stop();
+//     } else {
+//         osc.start();
+//     }
+// }
+
+
+////// 2ND VERSION :
+
 let osc, fft;
-let mode = "visual"; // Les modes possibles sont 'visual' et 'instrument'
+let reverb, delay;
+let reverbOn = true;
+let delayOn = true;
+let mode = "visual";
+let bgColor;
+let glitch = false;
 
 function setup() {
-    let cnv = createCanvas(800, 600);
+    const cnv = createCanvas(800, 600);
     cnv.parent("canvasContainer");
     osc = new p5.Oscillator("sine");
     fft = new p5.FFT();
-    // osc.start();
-    osc.amp(0); // Commence avec l'amplitude à 0 pour éviter le son au chargement
+    reverb = new p5.Reverb();
+    delay = new p5.Delay();
+
+    osc.amp(0);
+    reverb.process(osc, 3, 2);
+    delay.process(osc, 0.12, 0.7, 2300);
+
+    bgColor = color(0, 0, 0);
+    updateControlsText();
 }
 
 function draw() {
+    background(bgColor);
+
     if (mode === "visual") {
-    drawVisualMode();
+        drawVisualMode();
     } else if (mode === "instrument") {
-    drawInstrumentMode();
+        drawInstrumentMode();
     }
 }
 
 function drawVisualMode() {
-    let freq = map(mouseX, 0, width, 100, 500);
+    const freq = map(mouseX, 0, width, 100, 500);
     osc.freq(freq);
 
-    let amp = map(mouseY, 0, height, 1, 0);
+    const amp = map(mouseY, 0, height, 1, 0);
     osc.amp(amp);
 
-    let degradation = map(mouseX + mouseY, 0, width + height, 0, 255);
-    background(degradation, 100, 255 - degradation, 25);
+    const colorRatio = map(freq, 100, 500, 0, 255);
+    bgColor = color(colorRatio, 100, 255 - colorRatio);
 
-    let waveform = fft.waveform();
+    const waveform = fft.waveform();
     noFill();
-    stroke(255 - degradation, degradation, 100);
+    stroke(255 - colorRatio, colorRatio, 100);
     strokeWeight(2);
     beginShape();
     for (let i = 0; i < waveform.length; i++) {
-        let x = map(i, 0, waveform.length, 0, width);
-        let y = map(waveform[i], -1, 1, 0, height);
+        const x = map(i, 0, waveform.length, 0, width);
+        const y = map(waveform[i], -1, 1, 0, height);
         vertex(x, y);
-        }
+    }
     endShape();
 
-    if (amp > 0.8) {
+    if (amp > 0.8 && !glitch) {
         applyGlitchEffect();
+        glitch = true;
+    } else if (amp <= 0.8) {
+        glitch = false;
     }
+
+    updateInfoText(freq, amp);
 }
 
 function drawInstrumentMode() {
-      // CMode futur
-      // Pour l'instant, drawVisualMode pour l'exemple
     drawVisualMode();
 }
 
@@ -56,59 +146,94 @@ function applyGlitchEffect() {
     for (let y = 0; y < height; y++) {
         for (let x = 0; x < width; x++) {
             if (random() < 0.1) {
-            let index = (x + y * width) * 4;
-            let offset = int(random(-10, 10)) * 4;
-            pixels[index] = pixels[index + offset];
-            pixels[index + 1] = pixels[index + 1 + offset];
-            pixels[index + 2] = pixels[index + 2 + offset];
+                const index = (x + y * width) * 4;
+                const offset = int(random(-10, 10)) * 4;
+                pixels[index] = pixels[index + offset];
+                pixels[index + 1] = pixels[index + 1 + offset];
+                pixels[index + 2] = pixels[index + 2 + offset];
+            }
         }
     }
-}
-updatePixels();
+    updatePixels();
 }
 
 function mousePressed() {
     if (mode === "instrument") {
-    osc.start();
+        osc.start();
     }
 }
 
 function mouseReleased() {
     if (mode === "instrument") {
-    osc.stop();
+        osc.stop();
     }
 }
 
 function keyPressed() {
     if (key === "M" || key === "m") {
-        mode = mode === "visual" ? "instrument" : "visual";
-        console.log("Mode switched to: " + mode);
+        toggleMode();
     } else if (mode === "instrument") {
-        switch (key) {
+        switch (key.toUpperCase()) {
             case "A":
-            osc.setType("sine");
-            break;
-            case "a":
-            osc.setType("sine");
-            break
+                osc.setType("sine");
+                break;
             case "S":
-            osc.setType("triangle");
-            break;
-            case "s":
-            osc.setType("triangle");
-            break;
+                osc.setType("triangle");
+                break;
             case "D":
-            osc.setType("sawtooth");
-            break;
-            case "d":
-            osc.setType("sawtooth");
-            break;
+                osc.setType("sawtooth");
+                break;
             case "F":
-            osc.setType("square");
-            break;
-            case "f":
-            osc.setType("square");
-            break;
+                osc.setType("square");
+                break;
+            case "R":
+                toggleReverb();
+                break;
+            case "L":
+                toggleDelay();
+                break;
         }
     }
+}
+
+function toggleMode() {
+    mode = mode === "visual" ? "instrument" : "visual";
+    console.log("Mode switched to: " + mode);
+    updateControlsText();
+}
+
+function toggleReverb() {
+    reverbOn = !reverbOn;
+    if (reverbOn) {
+        reverb = new p5.Reverb();
+        reverb.process(osc, 3, 2);
+    } else {
+        reverb.disconnect();
+    }
+    updateControlsText();
+}
+
+function toggleDelay() {
+    delayOn = !delayOn;
+    if (delayOn) {
+        delay = new p5.Delay();
+        delay.process(osc, 0.12, 0.7, 2300);
+    } else {
+        delay.disconnect();
+    }
+    updateControlsText();
+}
+
+function updateInfoText(freq, amp) {
+    const infoText = document.getElementById("infoText");
+    infoText.textContent = `Fréquence : ${nf(freq, 1, 2)} Hz | Amplitude : ${nf(amp, 1, 2)}`;
+}
+
+function updateControlsText() {
+    const controlsText = document.getElementById("controlsText");
+    controlsText.innerHTML = `
+        Appuyez sur 'M' pour changer de mode. <br>
+        Mode instrument : A (Sine), S (Triangle), D (Sawtooth), F (Square) <br>
+        R : Activer/Désactiver Réverb (${reverbOn ? "On" : "Off"}) | L : Activer/Désactiver Delay (${delayOn ? "On" : "Off"})
+    `;
 }
