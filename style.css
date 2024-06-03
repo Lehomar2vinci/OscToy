@@ -2,7 +2,6 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -10,29 +9,200 @@ body {
     color: #ffffff;
     font-family: 'Arial', sans-serif;
     text-align: center;
+    overflow: hidden;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 #canvasContainer {
-    width: 800px;
-    height: 600px;
+    width: 100%;
+    height: 80%;
     position: relative;
     border: 2px solid #ffffff;
     border-radius: 10px;
     overflow: hidden;
+    margin-bottom: 1rem;
 }
 
-.infoText, .controlsText {
+.infoText, .controlsText, .menuButton, .oscillatorButton, .helpButton, .menu, .helpText {
     position: absolute;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-align: center;
+    z-index: 10;
+}
+
+.infoText {
     bottom: 10px;
     left: 10px;
     right: 10px;
-    color: #ffffff;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 5px 10px;
-    border-radius: 5px;
+    font-size: 1rem;
 }
 
 .controlsText {
     bottom: 50px;
-    font-size: 14px;
+    left: 10px;
+    right: 10px;
+    font-size: 0.875rem;
+    font-weight: bold;
+    user-select: none;
+    pointer-events: none;
+}
+
+.menuButton, .oscillatorButton, .helpButton {
+    top: 10px;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menuButton:hover, .oscillatorButton:hover, .helpButton:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.menuButton {
+    right: 10px;
+}
+
+.oscillatorButton {
+    left: 60px;
+}
+
+.helpButton {
+    left: 10px;
+    top: 60px;
+}
+
+.menu {
+    top: 50px;
+    right: 10px;
+    width: 250px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.menuHeader {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.spinner {
+    margin: 0.5rem 0;
+}
+
+.spinner label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.spinner select {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+}
+
+.menuItem {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    padding: 0.75rem;
+    margin: 0.25rem 0;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: background 0.3s;
+    width: 100%;
+    text-align: center;
+}
+
+.menuItem:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.helpText {
+    display: none;
+    top: 100px;
+    left: 10px;
+    width: 300px;
+    text-align: left;
+    font-size: 0.875rem;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.oscillatorButton.on {
+    background: linear-gradient(90deg, red, blue);
+    color: white;
+}
+
+.oscillatorButton.off {
+    background: linear-gradient(90deg, blue, red);
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .infoText, .controlsText {
+        font-size: 0.875rem;
+        padding: 0.5rem;
+    }
+
+    .menuButton, .oscillatorButton, .helpButton, .menuHeader, .menuItem {
+        font-size: 0.875rem;
+    }
+
+    .menu {
+        width: 200px;
+    }
+
+    .helpText {
+        width: 250px;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .infoText, .controlsText {
+        font-size: 0.75rem;
+        padding: 0.5rem;
+    }
+
+    .menuButton, .oscillatorButton, .helpButton, .menuHeader, .menuItem {
+        font-size: 0.75rem;
+    }
+
+    .menu {
+        width: 150px;
+    }
+
+    .helpText {
+        width: 200px;
+        font-size: 0.65rem;
+    }
 }
