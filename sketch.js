@@ -188,7 +188,7 @@ function updateInfoText(freq, amp) {
 function updateControlsText() {
   const controlsText = document.getElementById("controlsText");
   controlsText.innerHTML = `
-        Appuyez sur 'M' pour activer/désactiver l'oscillateur. <br>
+        <!-- Appuyez sur 'M' pour activer/désactiver l'oscillateur. <br> -->
         Oscillateur : ${oscOn ? "On" : "Off"} <br>
         Type : ${
           osc?.getType().charAt(0).toUpperCase() + osc?.getType().slice(1)
