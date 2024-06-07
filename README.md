@@ -13,6 +13,7 @@ PestOSC User Guide
 *   **Sound Types**: Switch between different oscillator types (sine, triangle, sawtooth, square) using keyboard keys for varied sound textures.
 *   **Mode Switching**: Toggle between a visual mode and an instrument mode by pressing 'M', allowing for different types of interaction.
 *   **Dynamic Visuals**: Visuals change based on mouse position, offering a degradation effect and color changes that reflect the sound's properties.
+*   **Now avaliable on smartphones.**
 
 ### How to Use
 
@@ -26,6 +27,7 @@ PestOSC User Guide
 
 *   This may not work on all browsers (works on Firefox). You can try it on [p5.js editor here too.](https://editor.p5js.org/Lehomar2vinci/full/xcNTPdnW5)
 
+
 🇫🇷 Français
 --------
 
@@ -38,6 +40,7 @@ PestOSC User Guide
 *   **Types de Son** : Changez entre différents types d'oscillateurs (sinusoïdal, triangulaire, en dents de scie, carré) en utilisant les touches du clavier pour des textures sonores variées.
 *   **Changement de Mode** : Basculez entre un mode visuel et un mode instrument en appuyant sur 'M', permettant différents types d'interaction.
 *   **Visuels Dynamiques** : Les visuels changent en fonction de la position de la souris, offrant un effet de dégradation et des changements de couleur qui reflètent les propriétés du son.
+*   **Projet désormais utilisable sur Smartphone**
 
 ### Comment Utiliser
 
