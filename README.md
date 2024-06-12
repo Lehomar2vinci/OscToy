@@ -1,55 +1,59 @@
-PestOSC User Guide
-========================
+PestOSC
+Overview
 
-🇬🇧 English
--------
+PestOSC is an experimental audio-visual instrument created using p5.js. It offers interactive sound control through mouse movements and visual feedback corresponding to the sound properties.
+Features
 
-### Features
+    Frequency and Amplitude Control: Adjust frequency (X-axis) and amplitude (Y-axis) by moving the mouse.
+    Visual Effects: Real-time visual feedback with glitch effects for high amplitude.
+    Oscillator Types: Switch between sine, triangle, sawtooth, and square waves using keyboard keys.
+    Mode Switching: Toggle between visual and instrument modes by pressing 'M'.
+    Dynamic Visuals: Mouse movements change visual degradation and colors reflecting sound properties.
 
-**PestOSC** is an experimental music instrument built with p5.js, offering an interactive audio-visual experience. Here are its key features:
+Usage
 
-*   **Frequency and Amplitude Control**: Move your mouse across the canvas to control the frequency (X-axis) and amplitude (Y-axis) of the sound.
-*   **Visual Effects**: Experience visual feedback in real-time based on the sound's frequency and amplitude, including a unique glitch effect when the amplitude is high.
-*   **Sound Types**: Switch between different oscillator types (sine, triangle, sawtooth, square) using keyboard keys for varied sound textures.
-*   **Mode Switching**: Toggle between a visual mode and an instrument mode by pressing 'M', allowing for different types of interaction.
-*   **Dynamic Visuals**: Visuals change based on mouse position, offering a degradation effect and color changes that reflect the sound's properties.
-*   **Now avaliable on smartphones.**
+    Start/Stop Sound: Click inside the canvas.
+    Control Sound: Move the mouse horizontally for frequency and vertically for amplitude.
+    Change Oscillator Type: Press 'A', 'S', 'D', or 'F' for different wave types.
+    Switch Modes: Press 'M' to toggle modes.
+    Explore Visuals: Enjoy interactive visuals changing with sound and mouse movement.
 
-### How to Use
+Known Issues
 
-1.  **Start/Stop Sound**: Click inside the canvas to start the sound. Click again to stop it.
-2.  **Control Sound**: Move the mouse horizontally to adjust the frequency and vertically to adjust the amplitude.
-3.  **Change Oscillator Type**: Press 'A' for sine wave, 'S' for triangle wave, 'D' for sawtooth wave, and 'F' for square wave.
-4.  **Switch Modes**: Press 'M' to switch between visual and instrument modes.
-5.  **Explore Visuals**: Enjoy the interactive visuals that change with the sound and mouse movement.
+    May not work on all browsers; confirmed to work on Firefox. Try it on the p5.js editor.
 
-### Known issues
+About
 
-*   This may not work on all browsers (works on Firefox). You can try it on [p5.js editor here too.](https://editor.p5js.org/Lehomar2vinci/full/xcNTPdnW5)
+PestOSC is a small visual project centered around a sound oscilloscope.
+Repository Details
 
+    Languages Used: JavaScript (72.2%), HTML (14.1%), CSS (13.7%)
 
-🇫🇷 Français
---------
+For more information, visit the PestOSC GitHub Repository.
+PestOSC
+Vue d'ensemble
 
-### Fonctionnalités
+PestOSC est un instrument audio-visuel expérimental créé avec p5.js. Il offre un contrôle sonore interactif via les mouvements de la souris et un retour visuel correspondant aux propriétés du son.
+Fonctionnalités
 
-**PestOSC** est un instrument de musique expérimental construit avec p5.js, offrant une expérience audio-visuelle interactive. Voici ses principales fonctionnalités :
+    Contrôle de la fréquence et de l'amplitude : Ajustez la fréquence (axe X) et l'amplitude (axe Y) en déplaçant la souris.
+    Effets visuels : Retour visuel en temps réel avec des effets de glitch pour une amplitude élevée.
+    Types d'oscillateurs : Alternez entre les ondes sinusoïdales, triangulaires, en dents de scie et carrées à l'aide des touches du clavier.
+    Changement de mode : Basculez entre les modes visuel et instrument en appuyant sur 'M'.
+    Visuels dynamiques : Les mouvements de la souris modifient la dégradation visuelle et les couleurs reflétant les propriétés du son.
 
-*   **Contrôle de Fréquence et d'Amplitude** : Déplacez votre souris sur le canvas pour contrôler la fréquence (axe X) et l'amplitude (axe Y) du son.
-*   **Effets Visuels** : Expérimentez un retour visuel en temps réel basé sur la fréquence et l'amplitude du son, incluant un effet de glitch unique lorsque l'amplitude est élevée.
-*   **Types de Son** : Changez entre différents types d'oscillateurs (sinusoïdal, triangulaire, en dents de scie, carré) en utilisant les touches du clavier pour des textures sonores variées.
-*   **Changement de Mode** : Basculez entre un mode visuel et un mode instrument en appuyant sur 'M', permettant différents types d'interaction.
-*   **Visuels Dynamiques** : Les visuels changent en fonction de la position de la souris, offrant un effet de dégradation et des changements de couleur qui reflètent les propriétés du son.
-*   **Projet désormais utilisable sur Smartphone**
+Utilisation
 
-### Comment Utiliser
+    Démarrer/Arrêter le son : Cliquez à l'intérieur du canvas.
+    Contrôler le son : Déplacez la souris horizontalement pour la fréquence et verticalement pour l'amplitude.
+    Changer le type d'oscillateur : Appuyez sur 'A', 'S', 'D' ou 'F' pour différents types d'ondes.
+    Changer de mode : Appuyez sur 'M' pour basculer entre les modes.
+    Explorer les visuels : Profitez des visuels interactifs changeant avec le son et les mouvements de la souris.
 
-1.  **Démarrer/Arrêter le Son** : Cliquez à l'intérieur du canvas pour démarrer le son. Cliquez de nouveau pour l'arrêter.
-2.  **Contrôler le Son** : Déplacez la souris horizontalement pour ajuster la fréquence et verticalement pour ajuster l'amplitude.
-3.  **Changer le Type d'Oscillateur** : Appuyez sur 'A' pour l'onde sinusoïdale, 'S' pour l'onde triangulaire, 'D' pour l'onde en dents de scie, et 'F' pour l'onde carrée.
-4.  **Changer de Modes** : Appuyez sur 'M' pour basculer entre les modes visuel et instrument.
-5.  **Explorer les Visuels** : Profitez des visuels interactifs qui changent avec le son et le mouvement de la souris.
+Problèmes connus
 
-### Problèmes connus
+    Peut ne pas fonctionner sur tous les navigateurs ; confirmé pour fonctionner sur Firefox. Essayez-le sur l'éditeur p5.js.
 
-*  Ce projet ne semble pas convenir à tous les navigateurs (fonctionne sous Firefox). Vous pouvez essayer PestOSC dans [l'éditeur de p5.js ici.](https://editor.p5js.org/Lehomar2vinci/full/xcNTPdnW5)
+À propos
+
+PestOSC est un petit projet visuel centré autour d'un oscilloscope sonore.
