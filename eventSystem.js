@@ -18,9 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   oscillatorButton.addEventListener("click", () => toggleOscillator());
   helpButton.addEventListener("click", () => toggleDisplay(helpText));
 
-  oscTypeSpinner.addEventListener("change", (event) =>
-    setOscType(event.target.value)
-  );
+  oscTypeSpinner.addEventListener("change", (event) => setOscType(event.target.value));
   reverbToggle.addEventListener("click", () => toggleReverb());
   delayToggle.addEventListener("click", () => toggleDelay());
 });
