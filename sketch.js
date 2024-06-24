@@ -46,12 +46,13 @@ function drawVisualMode() {
     osc.amp(amp * volume);
   }
 
-  const colorRatio = map(freq, 100, 500, 0, 255);
-  bgColor = color(colorRatio, 100, 255 - colorRatio);
+  const colorRatioX = map(mouseX, 0, width, 0, 255);
+  const colorRatioY = map(mouseY, 0, height, 0, 255);
+  bgColor = color(colorRatioX, 100, 255 - colorRatioY);
 
   const waveform = fft.waveform();
   noFill();
-  stroke(255 - colorRatio, colorRatio, 100);
+  stroke(255 - colorRatioX, colorRatioY, 100);
   strokeWeight(2);
   beginShape();
   for (let i = 0; i < waveform.length; i++) {
@@ -123,26 +124,30 @@ function setOscType(type) {
 
 function toggleReverb() {
   reverbOn = !reverbOn;
-  const reverbStatus = document.getElementById("reverbToggle");
+  const reverbToggle = document.getElementById("reverbToggle");
+  reverbToggle.textContent = reverbOn ? "On" : "Off";
+  reverbToggle.classList.toggle("on", reverbOn);
+  reverbToggle.classList.toggle("off", !reverbOn);
   if (reverbOn) {
+    reverb = new p5.Reverb();
     reverb.process(osc, 3, 2);
-    reverbStatus.value = "on";
   } else {
     reverb.disconnect();
-    reverbStatus.value = "off";
   }
   updateControlsText();
 }
 
 function toggleDelay() {
   delayOn = !delayOn;
-  const delayStatus = document.getElementById("delayToggle");
+  const delayToggle = document.getElementById("delayToggle");
+  delayToggle.textContent = delayOn ? "On" : "Off";
+  delayToggle.classList.toggle("on", delayOn);
+  delayToggle.classList.toggle("off", !delayOn);
   if (delayOn) {
+    delay = new p5.Delay();
     delay.process(osc, 0.12, 0.7, 2300);
-    delayStatus.value = "on";
   } else {
     delay.disconnect();
-    delayStatus.value = "off";
   }
   updateControlsText();
 }
