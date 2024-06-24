@@ -1,10 +1,11 @@
-let osc, fft;
-let reverb, delay;
+let osc, fft, reverb, delay;
 let reverbOn = true;
 let delayOn = true;
 let oscOn = false;
 let bgColor;
-let glitch = false;
+let baseFreq = 440;
+let baseAmp = 0.5;
+let volume = 0.5; // Initial volume
 
 function setup() {
   const cnv = createCanvas(windowWidth, windowHeight);
@@ -13,7 +14,7 @@ function setup() {
   userStartAudio().then(() => {
     osc = new p5.Oscillator("sine");
     osc.start();
-    osc.amp(0);
+    osc.amp(0); // Initialize with zero amplitude
 
     fft = new p5.FFT();
 
@@ -37,11 +38,13 @@ function draw() {
 }
 
 function drawVisualMode() {
-  const freq = map(mouseX || (touches[0]?.x ?? width / 2), 0, width, 100, 500);
-  if (osc) osc.freq(freq);
+  const freq = map(mouseX, 0, width, 100, 500) + parseFloat(baseFreq);
+  const amp = map(mouseY, 0, height, 1, 0) * parseFloat(baseAmp);
 
-  const amp = map(mouseY || (touches[0]?.y ?? height / 2), 0, height, 1, 0);
-  if (osc) osc.amp(amp);
+  if (osc) {
+    osc.freq(freq);
+    osc.amp(amp * volume);
+  }
 
   const colorRatio = map(freq, 100, 500, 0, 255);
   bgColor = color(colorRatio, 100, 255 - colorRatio);
@@ -58,35 +61,12 @@ function drawVisualMode() {
   }
   endShape();
 
-  if (amp > 0.8 && !glitch) {
-    applyGlitchEffect();
-    glitch = true;
-  } else if (amp <= 0.8) {
-    glitch = false;
-  }
-
   updateInfoText(freq, amp);
-}
-
-function applyGlitchEffect() {
-  loadPixels();
-  for (let y = 0; y < height; y++) {
-    for (let x = 0; x < width; x++) {
-      if (random() < 0.1) {
-        const index = (x + y * width) * 4;
-        const offset = int(random(-10, 10)) * 4;
-        pixels[index] = pixels[index + offset];
-        pixels[index + 1] = pixels[index + 1 + offset];
-        pixels[index + 2] = pixels[index + 2 + offset];
-      }
-    }
-  }
-  updatePixels();
 }
 
 function mousePressed() {
   if (oscOn && osc) {
-    osc.amp(0.5, 0.05);
+    osc.amp(0.5 * volume, 0.05); // Apply volume multiplier
   }
 }
 
@@ -124,16 +104,20 @@ function keyPressed() {
 
 function toggleOscillator() {
   oscOn = !oscOn;
-  console.log("Oscillator is now: " + (oscOn ? "On" : "Off"));
   const oscStatus = document.getElementById("oscillatorButton");
   oscStatus.textContent = oscOn ? "On" : "Off";
   oscStatus.classList.toggle("on", oscOn);
   oscStatus.classList.toggle("off", !oscOn);
   if (oscOn) {
-    osc.amp(0.5, 0.05);
+    osc.amp(0.5 * volume, 0.05); // Apply volume multiplier
   } else {
     osc.amp(0, 0.5);
   }
+  updateControlsText();
+}
+
+function setOscType(type) {
+  osc.setType(type);
   updateControlsText();
 }
 
@@ -141,15 +125,11 @@ function toggleReverb() {
   reverbOn = !reverbOn;
   const reverbStatus = document.getElementById("reverbToggle");
   if (reverbOn) {
-    reverb.disconnect();
-    reverb = new p5.Reverb();
     reverb.process(osc, 3, 2);
     reverbStatus.value = "on";
-    console.log("Reverb On");
   } else {
     reverb.disconnect();
     reverbStatus.value = "off";
-    console.log("Reverb Off");
   }
   updateControlsText();
 }
@@ -158,22 +138,13 @@ function toggleDelay() {
   delayOn = !delayOn;
   const delayStatus = document.getElementById("delayToggle");
   if (delayOn) {
-    delay.disconnect();
-    delay = new p5.Delay();
     delay.process(osc, 0.12, 0.7, 2300);
     delayStatus.value = "on";
-    console.log("Delay On");
   } else {
     delay.disconnect();
     delayStatus.value = "off";
-    console.log("Delay Off");
   }
   updateControlsText();
-}
-
-function setOscType(type) {
-  if (osc) osc.setType(type);
-  console.log("Oscillator type set to: " + type);
 }
 
 function updateInfoText(freq, amp) {
@@ -188,15 +159,34 @@ function updateInfoText(freq, amp) {
 function updateControlsText() {
   const controlsText = document.getElementById("controlsText");
   controlsText.innerHTML = `
-        <!-- Appuyez sur 'M' pour activer/désactiver l'oscillateur. <br> -->
         Oscillateur : ${oscOn ? "On" : "Off"} <br>
         Type : ${
           osc?.getType().charAt(0).toUpperCase() + osc?.getType().slice(1)
         } <br>
-        Réverb : ${reverbOn ? "On" : "Off"} | Delay : ${delayOn ? "On" : "Off"}
+        Réverbération : ${reverbOn ? "On" : "Off"} | Délai : ${
+    delayOn ? "On" : "Off"
+  }
     `;
 }
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
+
+document.getElementById("volumeSlider").addEventListener("input", (event) => {
+  volume = event.target.value;
+  if (oscOn && osc) {
+    osc.amp(baseAmp * volume); // Update amplitude with volume
+  }
+});
+
+document.getElementById("baseFreqSlider").addEventListener("input", (event) => {
+  baseFreq = event.target.value;
+});
+
+document.getElementById("baseAmpSlider").addEventListener("input", (event) => {
+  baseAmp = event.target.value;
+  if (oscOn && osc) {
+    osc.amp(baseAmp * volume); // Update amplitude with base amplitude and volume
+  }
+});
