@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
   oscTypeSpinner.addEventListener("change", (event) =>
     setOscType(event.target.value)
   );
-  reverbToggle.addEventListener("change", (event) => toggleReverb());
-  delayToggle.addEventListener("change", (event) => toggleDelay());
+  reverbToggle.addEventListener("click", () => toggleReverb());
+  delayToggle.addEventListener("click", () => toggleDelay());
 });
 
 function toggleDisplay(element) {
