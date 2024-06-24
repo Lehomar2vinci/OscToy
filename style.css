@@ -91,6 +91,8 @@ main {
     top: 60px;
     right: 10px;
     width: 250px;
+    max-height: 80%;
+    overflow-y: auto;
     display: none;
     flex-direction: column;
     align-items: center;
@@ -108,16 +110,16 @@ main {
     text-transform: uppercase;
 }
 
-.spinner {
+.spinner, .slider {
     margin: 0.5rem 0;
 }
 
-.spinner label {
+.spinner label, .slider label {
     display: block;
     margin-bottom: 0.5rem;
 }
 
-.spinner select {
+.spinner select, .slider input {
     width: 100%;
     padding: 0.5rem;
     font-size: 1rem;
