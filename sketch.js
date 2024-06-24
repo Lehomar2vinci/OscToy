@@ -48,11 +48,11 @@ function drawVisualMode() {
 
   const colorRatioX = map(mouseX, 0, width, 0, 255);
   const colorRatioY = map(mouseY, 0, height, 0, 255);
-  bgColor = color(colorRatioX, 100, 255 - colorRatioY);
+  bgColor = color(colorRatioX, 100, colorRatioY);
 
   const waveform = fft.waveform();
   noFill();
-  stroke(255 - colorRatioX, colorRatioY, 100);
+  stroke(255 - colorRatioX, colorRatioX, 100);
   strokeWeight(2);
   beginShape();
   for (let i = 0; i < waveform.length; i++) {
