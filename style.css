@@ -110,11 +110,11 @@ main {
     text-transform: uppercase;
 }
 
-.spinner, .slider {
+.spinner, .slider, .toggle {
     margin: 0.5rem 0;
 }
 
-.spinner label, .slider label {
+.spinner label, .slider label, .toggle label {
     display: block;
     margin-bottom: 0.5rem;
 }
@@ -125,6 +125,30 @@ main {
     font-size: 1rem;
     border-radius: 5px;
     border: none;
+}
+
+.toggleButton {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+
+.toggleButton.on {
+    background: linear-gradient(90deg, #32CD32, #228B22); /* Green gradient */
+    color: white;
+}
+
+.toggleButton.off {
+    background: linear-gradient(90deg, #FF4500, #DC143C); /* Red gradient */
+    color: white;
+}
+
+.toggleButton:hover {
+    opacity: 0.8;
 }
 
 .menuItem {
