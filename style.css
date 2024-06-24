@@ -90,7 +90,8 @@ main {
     position: absolute;
     top: 60px;
     right: 10px;
-    width: 250px;
+    width: 90%;
+    max-width: 400px;
     max-height: 80%;
     overflow-y: auto;
     display: none;
@@ -127,6 +128,39 @@ main {
     border: none;
 }
 
+.slider input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    background: #ffffff;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.slider input[type="range"]:hover {
+    opacity: 1;
+}
+
+.slider input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
 .toggleButton {
     width: 100%;
     padding: 0.5rem;
@@ -135,20 +169,36 @@ main {
     border: none;
     cursor: pointer;
     transition: background 0.3s, color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
 }
 
 .toggleButton.on {
-    background: linear-gradient(90deg, #32CD32, #228B22); /* Green gradient */
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
     color: white;
 }
 
 .toggleButton.off {
-    background: linear-gradient(90deg, #FF4500, #DC143C); /* Red gradient */
+    background: linear-gradient(90deg, #F44336, #E57373);
     color: white;
 }
 
-.toggleButton:hover {
-    opacity: 0.8;
+.toggleButton.on::before, .toggleButton.off::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: left 0.3s;
+}
+
+.toggleButton.on:hover::before, .toggleButton.off:hover::before {
+    left: 0;
 }
 
 .menuItem {
@@ -174,7 +224,8 @@ main {
     display: none;
     top: 100px;
     left: 10px;
-    width: 300px;
+    width: 90%;
+    max-width: 400px;
     text-align: left;
     font-size: 0.875rem;
     background: rgba(0, 0, 0, 0.7);
@@ -204,11 +255,11 @@ main {
     }
 
     .menu {
-        width: 200px;
+        width: 80%;
     }
 
     .helpText {
-        width: 250px;
+        width: 80%;
         font-size: 0.75rem;
     }
 }
@@ -224,11 +275,11 @@ main {
     }
 
     .menu {
-        width: 150px;
+        width: 90%;
     }
 
     .helpText {
-        width: 200px;
+        width: 90%;
         font-size: 0.65rem;
     }
 }
