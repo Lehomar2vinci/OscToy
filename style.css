@@ -29,15 +29,31 @@ main {
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
-.infoText, .controlsText, .menuButton, .oscillatorButton, .helpButton, .menu, .helpText {
+.infoText, .controlsText, .menuButton, .oscillatorButton, .saveButton, .loadButton, .helpButton, .menu, .helpText {
     color: #ffffff;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
     padding: 0.5rem 1rem;
     border-radius: 10px;
     text-align: center;
     z-index: 10;
+    backdrop-filter: blur(10px);
+}
+
+.notification {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    color: white;
+    display: none;
+    z-index: 100;
 }
 
 .infoText {
@@ -46,6 +62,7 @@ main {
     left: 10px;
     right: 10px;
     font-size: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .controlsText {
@@ -72,7 +89,7 @@ main {
 .button {
     font-size: 1.25rem;
     cursor: pointer;
-    transition: background 0.3s, color 0.3s;
+    transition: background 0.3s, color 0.3s, transform 0.3s;
     padding: 0.75rem 1.5rem;
     background: rgba(255, 255, 255, 0.2);
     border: none;
@@ -80,10 +97,13 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .button:hover {
     background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 .menu {
@@ -100,8 +120,9 @@ main {
     background: rgba(0, 0, 0, 0.8);
     padding: 1rem;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     z-index: 15;
+    animation: fadeIn 0.5s;
 }
 
 .menuHeader {
@@ -111,18 +132,18 @@ main {
     text-transform: uppercase;
 }
 
-.spinner, .slider, .toggle {
+.spinner, .slider, .toggle, .oscillatorTypes {
     margin: 0.75rem 0;
     width: 100%;
 }
 
-.spinner label, .slider label, .toggle label {
+.spinner label, .slider label, .toggle label, .oscillatorTypes label {
     display: block;
     margin-bottom: 0.5rem;
     font-size: 1.1rem;
 }
 
-.spinner select, .slider input {
+.spinner select, .slider input, .oscTypeButton {
     width: 100%;
     padding: 0.75rem;
     font-size: 1rem;
@@ -130,6 +151,36 @@ main {
     border: none;
     background: rgba(255, 255, 255, 0.2);
     color: #ffffff;
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.spinner select:hover, .slider input:hover, .oscTypeButton:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.oscTypeButton {
+    margin: 0.25rem 0;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.oscTypeButton[aria-pressed="true"] {
+    background: #4caf50;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.oscTypeButton[aria-pressed="false"]:hover {
+    background: #8bc34a;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .slider input[type="range"] {
@@ -140,11 +191,12 @@ main {
     background: #4caf50;
     outline: none;
     opacity: 0.7;
-    transition: opacity 0.2s;
+    transition: opacity 0.2s, box-shadow 0.3s;
 }
 
 .slider input[type="range"]:hover {
     opacity: 1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .slider input[type="range"]::-webkit-slider-thumb {
@@ -155,6 +207,7 @@ main {
     border-radius: 50%;
     background: #ffffff;
     cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .slider input[type="range"]::-moz-range-thumb {
@@ -163,6 +216,7 @@ main {
     border-radius: 50%;
     background: #ffffff;
     cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .toggleButton {
@@ -172,22 +226,24 @@ main {
     border-radius: 10px;
     border: none;
     cursor: pointer;
-    transition: background 0.3s, color 0.3s;
+    transition: background 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(90deg, #4caf50, #8bc34a);
-    color: white;
 }
 
 .toggleButton.on {
     background: linear-gradient(90deg, #4caf50, #8bc34a);
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .toggleButton.off {
     background: linear-gradient(90deg, #f44336, #e57373);
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .toggleButton::before {
@@ -199,6 +255,11 @@ main {
     height: 100%;
     background: rgba(255, 255, 255, 0.2);
     transition: left 0.3s;
+}
+
+.toggleButton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 .toggleButton:hover::before {
@@ -214,13 +275,15 @@ main {
     cursor: pointer;
     font-size: 1.2rem;
     border-radius: 10px;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
     width: 100%;
     text-align: center;
 }
 
 .menuItem:hover {
     background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 .helpText {
@@ -235,7 +298,7 @@ main {
     background: rgba(0, 0, 0, 0.8);
     padding: 1rem;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 .oscillatorButton.on {
@@ -285,5 +348,16 @@ main {
     .helpText {
         width: 90%;
         font-size: 0.75rem;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
