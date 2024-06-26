@@ -14,48 +14,67 @@
         <header class="header">
             <button class="menuButton button" id="menuButton" aria-label="Menu"><i class="fas fa-bars"></i></button>
             <button class="oscillatorButton button off" id="oscillatorButton" aria-label="Oscillator On/Off">Off</button>
+            <button class="saveButton button" id="saveButton" aria-label="Save Settings">Save</button>
+            <button class="loadButton button" id="loadButton" aria-label="Load Settings">Load</button>
             <button class="helpButton button" id="helpButton" aria-label="Help"><i class="fas fa-question-circle"></i></button>
         </header>
         <div id="canvasContainer" aria-label="Oscillator Canvas"></div>
         <div class="infoText" id="infoText" aria-live="polite">Fréquence : 0 Hz | Amplitude : 0</div>
-        <div class="controlsText" id="controlsText"></div>
+        <div class="controlsText" id="controlsText" aria-live="polite"></div>
+        <div class="notification" id="notification" aria-live="polite"></div>
         <nav class="menu" id="menu" aria-label="Paramètres">
             <div class="menuHeader">Paramètres</div>
-            <div class="spinner">
-                <label for="oscTypeSpinner">Type d'Oscillateur:</label>
-                <select id="oscTypeSpinner">
-                    <option value="sine">Sine</option>
-                    <option value="triangle">Triangle</option>
-                    <option value="sawtooth">Sawtooth</option>
-                    <option value="square">Square</option>
-                </select>
+            <div class="oscillatorTypes" role="radiogroup" aria-labelledby="oscillatorTypesLabel">
+                <div id="oscillatorTypesLabel">Type d'Oscillateur:</div>
+                <button class="oscTypeButton" data-type="sine" aria-pressed="false">Sine</button>
+                <button class="oscTypeButton" data-type="triangle" aria-pressed="false">Triangle</button>
+                <button class="oscTypeButton" data-type="sawtooth" aria-pressed="false">Sawtooth</button>
+                <button class="oscTypeButton" data-type="square" aria-pressed="false">Square</button>
             </div>
             <div class="toggle">
                 <label for="reverbToggle">Réverbération:</label>
-                <button id="reverbToggle" class="toggleButton on">On</button>
+                <button id="reverbToggle" class="toggleButton on" aria-pressed="true">On</button>
+            </div>
+            <div class="slider">
+                <label for="reverbTimeSlider">Temps de Réverbération:</label>
+                <input type="range" id="reverbTimeSlider" min="0" max="10" step="0.1" value="3" aria-valuenow="3" aria-valuemin="0" aria-valuemax="10">
+            </div>
+            <div class="slider">
+                <label for="reverbDecaySlider">Atténuation de Réverbération:</label>
+                <input type="range" id="reverbDecaySlider" min="0" max="10" step="0.1" value="2" aria-valuenow="2" aria-valuemin="0" aria-valuemax="10">
             </div>
             <div class="toggle">
                 <label for="delayToggle">Délai:</label>
-                <button id="delayToggle" class="toggleButton on">On</button>
+                <button id="delayToggle" class="toggleButton on" aria-pressed="true">On</button>
+            </div>
+            <div class="slider">
+                <label for="delayTimeSlider">Temps de Délai:</label>
+                <input type="range" id="delayTimeSlider" min="0" max="1" step="0.01" value="0.12" aria-valuenow="0.12" aria-valuemin="0" aria-valuemax="1">
+            </div>
+            <div class="slider">
+                <label for="delayFeedbackSlider">Feedback de Délai:</label>
+                <input type="range" id="delayFeedbackSlider" min="0" max="1" step="0.01" value="0.7" aria-valuenow="0.7" aria-valuemin="0" aria-valuemax="1">
             </div>
             <div class="slider">
                 <label for="volumeSlider">Volume:</label>
-                <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5">
+                <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5" aria-valuenow="0.5" aria-valuemin="0" aria-valuemax="1">
             </div>
             <div class="slider">
                 <label for="baseFreqSlider">Fréquence de Base:</label>
-                <input type="range" id="baseFreqSlider" min="20" max="2000" step="1" value="440">
+                <input type="range" id="baseFreqSlider" min="20" max="2000" step="1" value="440" aria-valuenow="440" aria-valuemin="20" aria-valuemax="2000">
             </div>
             <div class="slider">
                 <label for="baseAmpSlider">Amplitude de Base:</label>
-                <input type="range" id="baseAmpSlider" min="0" max="1" step="0.01" value="0.5">
+                <input type="range" id="baseAmpSlider" min="0" max="1" step="0.01" value="0.5" aria-valuenow="0.5" aria-valuemin="0" aria-valuemax="1">
             </div>
             <button class="menuItem" onclick="closeMenu()">Fermer</button>
         </nav>
-        <div class="helpText" id="helpText" role="dialog">
+        <dialog class="helpText" id="helpText" aria-labelledby="helpTextLabel">
+            <div id="helpTextLabel">Aide</div>
             Appuyez sur 'M' pour activer/désactiver l'oscillateur.<br>
             Utilisez les options du menu pour ajuster les paramètres.<br>
-        </div>
+            Une application créée par Nathan Chambrette - 2024 Tous droits réservés. - <br>
+        </dialog>
     </main>
     <script src="eventSystem.js"></script>
     <script src="sketch.js"></script>
