@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const helpButton = document.getElementById("helpButton");
   const menu = document.getElementById("menu");
   const helpText = document.getElementById("helpText");
-  const oscTypeSpinner = document.getElementById("oscTypeSpinner");
   const reverbToggle = document.getElementById("reverbToggle");
   const delayToggle = document.getElementById("delayToggle");
 
@@ -17,8 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
   menuButton.addEventListener("click", () => toggleDisplay(menu));
   oscillatorButton.addEventListener("click", () => toggleOscillator());
   helpButton.addEventListener("click", () => toggleDisplay(helpText));
-
-  oscTypeSpinner.addEventListener("change", (event) => setOscType(event.target.value));
   reverbToggle.addEventListener("click", () => toggleReverb());
   delayToggle.addEventListener("click", () => toggleDelay());
 });
